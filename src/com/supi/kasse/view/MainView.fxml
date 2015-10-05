@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="200.0" minWidth="300.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@supi.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supi.kasse.view.MainViewController">
+   <children>
+      <TextField id="ean_input" fx:id="eanInput" layoutX="210.0" layoutY="350.0" onKeyReleased="#eanInputKeyReleased" prefHeight="26.0" prefWidth="193.0" promptText="Produkt-EAN + &lt;Enter&gt;" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="197.0" />
+      <TableView id="products_table" fx:id="billTable" layoutY="75.0" prefHeight="250.0" prefWidth="600.0" style="text-align: right;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" editable="false" prefWidth="399.0" sortable="false" text="Produkt" />
+          <TableColumn fx:id="priceColumn" editable="false" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" sortable="false" text="Betrag" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label id="sum_label" layoutX="266.0" layoutY="24.0" text="Summe:" AnchorPane.rightAnchor="243.0" AnchorPane.topAnchor="24.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label id="sum_text" fx:id="sumLabel" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="16.0" prefHeight="44.0" prefWidth="208.0" text="0,00 €" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="16.0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView id="logo_img" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../supi-logo-75.png" />
+         </image>
+      </ImageView>
+      <Label id="ean_label" layoutX="169.0" layoutY="355.0" text="EAN:" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="401.0" />
+      <Button id="final_button" layoutX="430.0" layoutY="350.0" mnemonicParsing="false" onMouseClicked="#buy" prefHeight="26.0" prefWidth="149.0" text="Einkauf abschließen" />
+   </children>
+</AnchorPane>
