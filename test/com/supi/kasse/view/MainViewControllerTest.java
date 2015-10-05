@@ -161,4 +161,19 @@ public class MainViewControllerTest {
 	}
 
 
+	@Test
+	public void testApplySaleToProduct() throws Exception {
+		final Product product1 = productDatabase.get("12345");
+		final Product product2 = productDatabase.get("12345");
+		final Product product3 = productDatabase.get("12345");
+
+		bill.add(product1);
+		bill.add(product2);
+
+		controller.applySaleToProduct(product3);
+
+		assertEquals(0,product3.getPrice());
+	}
+
+
 }

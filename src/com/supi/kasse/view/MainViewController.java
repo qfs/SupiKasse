@@ -72,6 +72,7 @@ public class MainViewController {
 		final Product product = productDatabase.get(enteredEan);
 
 		if (product != null) {
+			applySaleToProduct(product);
 			addProductToBill(product);
 			eanInput.setText("");
 		} else {
@@ -80,6 +81,21 @@ public class MainViewController {
 		}
 		focusEanInput();
 	}
+
+
+	void applySaleToProduct(Product product) {
+		int count = 0;
+		for (Product otherProduct: mainApp.getCurrentBill()) {
+			if (otherProduct.getEan().equals(product.getEan())) {
+				count++;
+			}
+		}
+
+		if (count % 3 == 2) {
+			product.setPrice(0); // Free!
+		}
+	}
+
 
 	void addProductToBill(final Product product) {
 		assert product != null;

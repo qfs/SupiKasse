@@ -17,6 +17,6 @@ Use the defined tags to switch between the different development stages of the a
 
 1. Base without any tests
 2. Base with unit tests
-3. Exended version with sale method
+3. Extended version with sale method
 4. Extended version with TestFX test
 5. Extended version with bugfix
