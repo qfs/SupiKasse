@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 import lombok.Data;
 
 @Data
-public class Product {
+public class Product implements Cloneable {
     final StringProperty eanProperty;
     final StringProperty nameProperty;
     final IntegerProperty priceProperty;
@@ -42,4 +42,7 @@ public class Product {
     	priceProperty.set(price);
     }
 
+    public Product clone() {
+    	return new Product(getEan(),getName(),getPrice());
+    }
 }

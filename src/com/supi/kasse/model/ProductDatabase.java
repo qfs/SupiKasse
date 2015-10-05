@@ -30,5 +30,14 @@ public class ProductDatabase implements Map<String,Product> {
 		data.put(ean,newProduct);
 	}
 
+	public Product get(final String ean) {
+		final Product product = data.get(ean);
+		if (product == null) {
+			return product;
+		}
+		return product.clone();
+	}
+
+
 
 }
