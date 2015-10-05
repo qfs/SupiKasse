@@ -22,7 +22,7 @@ public class ProductDatabase implements Map<String,Product> {
 		addProduct("20140427","Delik Leberwurst",129);
 		addProduct("8711600854703","Dusch Das Fresh",199);
 		addProduct("20358549","W5 Geschirr-Tabs",99);
-		addProduct("4043619824243","DVI Kable",1499);
+		addProduct("4043619824243","DVI Cable",1499);
 	}
 
 	void addProduct(final String ean, final String name, final int price) {
