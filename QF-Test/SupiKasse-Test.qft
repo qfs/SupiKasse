@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE RootStep>
+<RootStep id="_0" name="root"
+          signature="302E021500C59D172007F8D33D95AE571F3F90C14D7B492C41021500860C16B58513DFF16752747D719490F44EEB663A"
+          version="4.1.0">
+  <include>qfs.qft</include>
+  <TestSet id="main_tests" name="Kassentests" uid="_1">
+    <DependencyReference id="_Z" reference="Init"/>
+    <TestCase id="_B" name="Test einfache Produkteingabe">
+      <ProcedureCall id="_O" procedure="Produkt einfügen">
+        <variable name="ean">4000417304001</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_g" procedure="Summe prüfen">
+        <variable name="sum">TLR 0,99</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_e" procedure="Preis des letzten Produktes prüfen">
+        <variable name="price">TLR 0,99</variable>
+      </ProcedureCall>
+    </TestCase>
+    <TestCase id="_P" name="Mehrere Produkte">
+      <ProcedureCall id="_R" procedure="Produkt einfügen">
+        <variable name="ean">4000417304001</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_h" procedure="Preis des letzten Produktes prüfen">
+        <variable name="price">TLR 0,99</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_i" procedure="Summe prüfen">
+        <variable name="sum">TLR 0,99</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_Q" procedure="Produkt einfügen">
+        <variable name="ean">20140427</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_k" procedure="Preis des letzten Produktes prüfen">
+        <variable name="price">TLR 1,29</variable>
+      </ProcedureCall>
+      <ProcedureCall id="_j" procedure="Summe prüfen">
+        <variable name="sum">TLR 2,28</variable>
+      </ProcedureCall>
+    </TestCase>
+    <TestCase id="_z" name="Rabattaktion">
+      <Test id="_-" name="Produkte Einfügen">
+        <DataDriver id="_+" name="Daten">
+          <ProcedureCall id="_16" procedure="Produkte abrufen"/>
+        </DataDriver>
+        <ProcedureCall id="_q" procedure="Produkt einfügen und testen">
+          <variable name="ean">$(EAN)</variable>
+          <variable name="price">$(Einzelpreis)</variable>
+          <variable name="sum">$(Summe)</variable>
+        </ProcedureCall>
+      </Test>
+      <Test id="_12" name="Tabelle checken">
+        <DataDriver id="_17" name="Daten">
+          <ProcedureCall id="_18" procedure="Produkte abrufen"/>
+        </DataDriver>
+        <ProcedureCall id="_1L" procedure="Preis prüfen">
+          <variable name="price">$(Einzelpreis)</variable>
+        </ProcedureCall>
+      </Test>
+    </TestCase>
+    <TestCase id="_19" name="Fehlerhafte Eingabe (Bildtest)">
+      <ProcedureCall id="_1G" procedure="Produkt einfügen">
+        <variable name="ean">42</variable>
+      </ProcedureCall>
+      <CheckImageStep client="client" component="ean_input" height="1"
+                      id="_1F" width="1" x="5" y="4">
+        <ImageNode height="32" name="checkimage" width="195">
+          <binary size="561">eJztnL0rGmEch832o7NT/5DunYQWpwzxD4ByabYO8dQtU9dOggQDNaUVwnHYlNJFEIOQ5Wqi5qlH85hWB4+h
+PXMmkA8t0XvnJSSlAd/zpRnez9MD+vreIjy94nt7np/8TM9Ww/liaNkQMjhfUDnLhOjRGFva9IfybZxt
+jyBc4Y/GmMqhfigkYzJ4QiEI26HWJW2k+UNJgpBZL68RfHFgTpbPT+3fELJ7HdKePr5O7RIAFu5K7RcA
+LNwVkgMACwgJcIE2pFBaXdEnB/r/fCPgfkFIgAsICXBhnZDi6dFuoXE2PH6c7KX1iVLpv9rXIwhJMAKH
+FJG8NKwcNb2hJaq6s3atn/ruHVdobCIkkQgY1k8jvTc9XIaUbadoUNLC8mw2MXCcQf9FQhKJQCF0TdZo
+0ekkypapeiEpfZpKZf4FKlyynVnvOUISiQAhPcxTNhfxjBot346ImeqjD0Wwv2jVkzM4s3cISSSYQ9po
+X3jx+VylZmJHFJJ3a8OW18fdo+zX84CyLRasISXdk3prS3luKK2tKkXvxuX7A3/XFlUt0wi0m4iL8b0w
+sIb1UrPMgW4OLlyXL6kd3rXF4GqsN/IJriOJyTrXkbyPNu9cSe5c1lyxFc12YrIWk6sb+4Vs/5WCS1iR
+5vTv5wbYtYkFviIBXEBIgAusIUlpdUWffkJIAoEftgEuICTABYQEuICQABduhqQYVzdInl2CyOo/btmG
+MKj+n1hI1m9Ig1r0/AHaEMBf</binary>
+        </ImageNode>
+      </CheckImageStep>
+    </TestCase>
+    <TestCase id="_1H" name="Fehlerhafte Eingabe (Custom Check)">
+      <ProcedureCall id="_1I" procedure="Produkt einfügen">
+        <variable name="ean">23</variable>
+      </ProcedureCall>
+      <CheckStringStep checktype="StyleClasses ist Error" client="client"
+                       component="ean_input" id="_1Q" regexp="true">
+        <text>.*error.*</text>
+      </CheckStringStep>
+    </TestCase>
+    <TestCase id="_1S" name="Korrekte Eingabe (Custom Check)">
+      <ProcedureCall id="_1T" procedure="Produkt einfügen">
+        <variable name="ean">4000417304001</variable>
+      </ProcedureCall>
+      <CheckStringStep checktype="StyleClasses ist Error" client="client"
+                       component="ean_input" id="_1U" notcheck="true"
+                       regexp="true">
+        <text>.*error.*</text>
+      </CheckStringStep>
+    </TestCase>
+  </TestSet>
+  <PackageRoot id="_3">
+    <Dependency id="_W" name="Init">
+      <SetupSequence id="_X">
+        <ProcedureCall id="_1b" procedure="Anwendung starten"/>
+        <ProcedureCall id="_Y" procedure="System zurücksetzen"/>
+        <ClientScriptStep client="client" id="_1O"
+                          name="StyleClasses Checker registrieren">
+          <code>from de.qfs.apps.qftest.extensions.checks import CheckerRegistry, \
+    Checker, DefaultCheckType, CheckDataType
+from de.qfs.apps.qftest.extensions.items import ItemRegistry
+from de.qfs.apps.qftest.shared.data.check import StringCheckData
+from de.qfs.lib.util import Pair
+import jarray
+
+componentClass = "javafx.scene.Node"
+styleClassCheckType = DefaultCheckType("StyleClasses", CheckDataType.STRING, "Style Classes")
+
+class StyleClassesChecker(Checker):
+    def __init__(self):
+        pass
+
+    def getSupportedCheckTypes(self, com, item):
+        return jarray.array([styleClassCheckType], DefaultCheckType)
+
+    def getCheckData(self, com, item, checkType):
+        value = com.getStyleClass().toString()
+        return StringCheckData(checkType.getIdentifier(), value)
+
+    def getCheckDataAndItem(self, com, item, checkType):
+        data = self.getCheckData(com, item, checkType)
+        if data is None:
+            return None
+        return Pair(data, None)
+
+
+def unregister():
+    try:
+        CheckerRegistry.instance().unregisterChecker(
+            componentClass, styleClassesChecker)
+    except:
+        pass
+
+def register():
+    unregister()
+    global styleClassesChecker
+    styleClassesChecker = StyleClassesChecker()
+    CheckerRegistry.instance().registerChecker(
+        componentClass, styleClassesChecker)
+
+register()
+</code>
+        </ClientScriptStep>
+      </SetupSequence>
+    </Dependency>
+    <Procedure id="_1V" name="Anwendung starten">
+      <TryStep id="_1Z">
+        <JavaClientStarter class="com.supi.kasse.MainApp" client="client"
+                           directory="${qftest:suite.dir}"
+                           executable="${qftest:java}" id="_1X">
+          <parameter>-classpath</parameter>
+          <parameter>../bin:../../MoneyTool/bin</parameter>
+        </JavaClientStarter>
+        <ClientWaiter client="client" id="_1Y"/>
+        <CatchSequence exception="DuplicateClientException" id="_1a"
+                       maxerror="0"/>
+      </TryStep>
+    </Procedure>
+    <Procedure id="_15" name="Produkte abrufen">
+      <ExcelDataBinder excelfile="Testdaten.xls" id="_x" name="Produkte"
+                       var="zeile"/>
+    </Procedure>
+    <Procedure id="_p" name="Produkt einfügen und testen">
+      <variable name="ean"/>
+      <variable name="price"/>
+      <variable name="sum"/>
+      <ProcedureCall id="_m" procedure="Produkt einfügen"/>
+      <ProcedureCall id="_n" procedure="Preis des letzten Produktes prüfen"/>
+      <ProcedureCall id="_o" procedure="Summe prüfen"/>
+    </Procedure>
+    <Procedure id="_N" name="Produkt einfügen">
+      <variable name="ean"/>
+      <MouseEventStep clicks="1" client="client" component="ean_input"
+                      event="MOUSE_MPRC" id="_C" modifiers="16" x="161"
+                      y="13"/>
+      <TextInputStep clear="true" client="client" component="ean_input"
+                     id="_D">
+        <text>$(ean)</text>
+      </TextInputStep>
+      <KeyEventStep client="client" component="ean_input" event="KEY_PTR"
+                    id="_E" keychar="0" keycode="10" modifiers="0"/>
+      <KeyEventStep client="client" component="winSupiKasse.panel"
+                    event="KEY_PRESSED" id="_F" keychar="0" keycode="10"
+                    modifiers="0"/>
+      <KeyEventStep client="client" component="ean_input" event="KEY_TYPED"
+                    id="_G" keychar="13" keycode="0" modifiers="0"/>
+      <KeyEventStep client="client" component="ean_input" event="KEY_RELEASED"
+                    id="_H" keychar="0" keycode="10" modifiers="0"/>
+    </Procedure>
+    <Procedure id="_f" name="Summe prüfen">
+      <variable name="sum"/>
+      <CheckStringStep client="client" component="Summe" id="_I">
+        <text>$(sum)</text>
+      </CheckStringStep>
+    </Procedure>
+    <Procedure id="_b" name="Preis des letzten Produktes prüfen">
+      <variable name="price"/>
+      <ProcedureCall id="_1M" procedure="Preis prüfen">
+        <variable name="zeile">-1</variable>
+      </ProcedureCall>
+    </Procedure>
+    <Procedure id="_1K" name="Preis prüfen">
+      <variable name="zeile"/>
+      <variable name="price"/>
+      <CheckStringStep checktype="item" client="client"
+                       component="products_table@Betrag&amp;$(zeile)" id="_u">
+        <text>$(price)</text>
+      </CheckStringStep>
+    </Procedure>
+    <Procedure id="_S" name="System zurücksetzen">
+      <MouseEventStep clicks="1" client="client" component="final_button"
+                      event="MOUSE_MPRC" id="_T" modifiers="16"/>
+    </Procedure>
+  </PackageRoot>
+  <ExtraSequence id="_4"/>
+  <WindowList id="_5">
+    <WindowStep class="Window" engine="fx" feature="SupiKasse" height="422"
+                id="winSupiKasse" uid="_6" width="600">
+      <extrafeature name="qfs:class" negate="false" regexp="false" state="0">javafx.stage.Stage</extrafeature>
+      <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                    state="0">Window</extrafeature>
+      <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                    state="0">javafx.stage.Stage</extrafeature>
+      <ComponentStep class="TextField" classcount="1" classindex="0"
+                     height="26" id="ean_input" name="ean_input" uid="_7"
+                     width="193" x="210" y="372">
+        <extrafeature name="qfs:class" negate="false" regexp="false"
+                      state="0">javafx.scene.control.TextField</extrafeature>
+        <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                      state="0">TextField</extrafeature>
+        <extrafeature name="qfs:label" negate="false" regexp="false"
+                      state="1">EAN:</extrafeature>
+        <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                      state="0">javafx.scene.control.TextField</extrafeature>
+        <extrafeature name="styleclass" negate="false" regexp="false"
+                      state="0">text-input text-field</extrafeature>
+      </ComponentStep>
+      <ComponentStep class="Panel" classcount="2" classindex="1" height="400"
+                     id="winSupiKasse.panel" uid="_8" width="600" x="0"
+                     y="22">
+        <extrafeature name="qfs:class" negate="false" regexp="false"
+                      state="0">javafx.scene.layout.AnchorPane</extrafeature>
+        <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                      state="0">Panel</extrafeature>
+        <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                      state="0">javafx.scene.layout.AnchorPane</extrafeature>
+      </ComponentStep>
+      <ComponentStep class="Label" classcount="3" classindex="1"
+                     feature="TLR 0,99" height="44" id="Summe" name="sum_text"
+                     uid="_9" width="208" x="368" y="38">
+        <extrafeature name="alignment" negate="false" regexp="false"
+                      state="0">CENTER_RIGHT</extrafeature>
+        <extrafeature name="mnemonic_parsing" negate="false" regexp="false"
+                      state="0">false</extrafeature>
+        <extrafeature name="qfs:class" negate="false" regexp="false"
+                      state="0">javafx.scene.control.Label</extrafeature>
+        <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                      state="0">Label</extrafeature>
+        <extrafeature name="qfs:label" negate="false" regexp="false"
+                      state="1">TLR 0,99</extrafeature>
+        <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                      state="0">javafx.scene.control.Label</extrafeature>
+        <extrafeature name="styleclass" negate="false" regexp="false"
+                      state="0">label</extrafeature>
+        <extrafeature name="wrap_text" negate="false" regexp="false"
+                      state="0">false</extrafeature>
+      </ComponentStep>
+      <ComponentStep class="Table" classcount="1" classindex="0" height="250"
+                     id="products_table" name="products_table" uid="_A"
+                     width="600" x="0" y="97">
+        <extrafeature name="qfs:class" negate="false" regexp="false"
+                      state="0">javafx.scene.control.TableView</extrafeature>
+        <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                      state="0">Table</extrafeature>
+        <extrafeature name="qfs:label" negate="false" regexp="false"
+                      state="1">TLR 0,99</extrafeature>
+        <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                      state="0">javafx.scene.control.TableView</extrafeature>
+        <extrafeature name="styleclass" negate="false" regexp="false"
+                      state="0">table-view</extrafeature>
+      </ComponentStep>
+      <ComponentStep class="Button" classcount="1" classindex="0"
+                     feature="Einkauf abschließen" height="27"
+                     id="final_button" name="final_button" uid="_K"
+                     width="149" x="430" y="372">
+        <extrafeature name="alignment" negate="false" regexp="false"
+                      state="0">CENTER</extrafeature>
+        <extrafeature name="mnemonic_parsing" negate="false" regexp="false"
+                      state="0">false</extrafeature>
+        <extrafeature name="qfs:class" negate="false" regexp="false"
+                      state="0">javafx.scene.control.Button</extrafeature>
+        <extrafeature name="qfs:genericclass" negate="false" regexp="false"
+                      state="0">Button</extrafeature>
+        <extrafeature name="qfs:label" negate="false" regexp="false"
+                      state="1">Einkauf abschließen</extrafeature>
+        <extrafeature name="qfs:systemclass" negate="false" regexp="false"
+                      state="0">javafx.scene.control.Button</extrafeature>
+        <extrafeature name="styleclass" negate="false" regexp="false"
+                      state="0">button</extrafeature>
+        <extrafeature name="wrap_text" negate="false" regexp="false"
+                      state="0">false</extrafeature>
+      </ComponentStep>
+    </WindowStep>
+  </WindowList>
+</RootStep>
